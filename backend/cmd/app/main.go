@@ -4,18 +4,11 @@ import (
 	"backend/internal/api/server"
 	"backend/internal/utils/env"
 	"log"
-
-	"github.com/joho/godotenv"
 	_ "github.com/godror/godror"
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-
-	listenAddr := env.GetEnvString("PORT", ":8080")
+	listenAddr := env.GetEnvString("PORT", ":8081")
 	server := server.NewServer(listenAddr)
 
 	log.Printf("Starting server on port: %s", listenAddr)
