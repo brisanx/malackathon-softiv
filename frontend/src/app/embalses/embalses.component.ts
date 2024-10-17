@@ -40,13 +40,6 @@ export class EmbalsesComponent implements AfterViewInit{
   latitude: number | null = null;
   longitude: number | null = null;
 
-  onSubmit(): void {
-    if (this.latitude !== null && this.longitude !== null) {
-      this.mapaComponent.addMarker(this.latitude, this.longitude);
-      console.log(`Latitud: ${this.latitude}, Longitud: ${this.longitude}`);
-    }
-  }
-
   getEmbalses(): Observable<Embalse[]> {
     return of([
       { id: 1, nombre: 'Embalse A', aguaTotal: 500, electricoFlag: true },

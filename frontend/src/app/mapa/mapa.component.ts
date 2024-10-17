@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit, Inject, PLATFORM_ID, ViewChild, Eleme
 import { isPlatformBrowser } from '@angular/common';
 import "@maptiler/sdk/dist/maptiler-sdk.css";
 import { FormsModule } from '@angular/forms';
-import { Map, MapStyle, Marker, config } from '@maptiler/sdk';
+import { Map, MapStyle, Marker, config, Popup } from '@maptiler/sdk';
 import '@maptiler/sdk/dist/maptiler-sdk.css';
 import { debounce } from 'lodash';
 import { EmbalsesService } from '../embalses.service'; // Importa el servicio
@@ -22,6 +22,7 @@ export class MapaComponent implements OnInit, AfterViewInit, OnDestroy {
   longitude: number | null = null;
   radius: number = 10; // Valor inicial del radio en km
   map: Map | undefined;
+  markers: Marker[] = []; // Array para almacenar los marcadores
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -73,11 +74,33 @@ export class MapaComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  public addMarker(latitude: number, longitude: number): void {
+  public addMarker(latitude: number, longitude: number, embalse: any): void {
     if (this.map) {
-      new Marker({ color: "#FF0000" })
+      // Crear el elemento DOM para el marcador
+      const el = document.createElement('div');
+      el.className = 'marker';
+      el.style.backgroundImage = 'url(https://docs.maptiler.com/sdk-js/assets/washington-monument.jpg)';
+      el.style.width = '50px';
+      el.style.height = '50px';
+      el.style.backgroundSize = 'cover';
+      el.style.borderRadius = '50%';
+      el.style.cursor = 'pointer';
+
+      // Crear el popup
+      const popup = new Popup({ offset: 25 }).setHTML(
+        `<h3>${embalse.nombre}</h3>
+         <p><strong>Embalse:</strong> ${embalse.embalse}</p>
+         <p><strong>Provincia:</strong> ${embalse.provincia}</p>
+         <p><strong>CCAA:</strong> ${embalse.ccaa}</p>`
+      );
+
+      // Crear el marcador
+      const marker = new Marker({ element: el })
         .setLngLat([longitude, latitude])
+        .setPopup(popup) // Añadir el popup al marcador
         .addTo(this.map);
+
+      this.markers.push(marker); // Añadir el marcador al array
     }
   }
 
@@ -90,7 +113,8 @@ export class MapaComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onSubmit(): void {
     if (this.latitude !== null && this.longitude !== null) {
-      this.addMarker(this.latitude, this.longitude);
+      // Pasa un objeto vacío como tercer argumento
+      this.addMarker(this.latitude, this.longitude, {});
       console.log(`Latitud: ${this.latitude}, Longitud: ${this.longitude}`);
     }
   }
@@ -107,9 +131,14 @@ export class MapaComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private updateMapWithEmbalses(embalses: any): void {
+    // Eliminar todos los marcadores existentes
+    this.markers.forEach(marker => marker.remove());
+    this.markers = [];
+
+    // Añadir nuevos marcadores
     if (this.map) {
       embalses.forEach((embalse: any) => {
-        this.addMarker(embalse.latitude, embalse.longitude);
+        this.addMarker(embalse.x, embalse.y, embalse);
       });
     }
   }
@@ -150,7 +179,7 @@ export class MapaComponent implements OnInit, AfterViewInit, OnDestroy {
       if (this.map.getSource('geojson-data')) {
         this.map.removeSource('geojson-data');
       }
-  
+
       const geojson = this.createCircleGeoJSON([longitude, latitude], radius);
       this.map.addSource('geojson-data', {
         type: 'geojson',
