@@ -32,6 +32,11 @@ export class EmbalsesService {
     this.longitudeSource.next(longitude);
   }
   
+  getEmbalsesWithinRadius(latitude: number, longitude: number, radius: number): Observable<any> {
+    const url = `${this.apiUrl}?lat=${latitude}&lng=${longitude}&radius=${radius}`;
+    return this.http.get<any>(url);
+  }
+
   /*
   getEmbalses(): Observable<Embalse[]> {
     // Aquí eventualmente harás la llamada HTTP a tu backend
