@@ -1,0 +1,29 @@
+.embalses-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .embalses-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .embalses-table th, .embalses-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .embalses-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  .embalses-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .embalses-table tr:hover {
+    background-color: #ddd;
+  }
