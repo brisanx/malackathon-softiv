@@ -1,25 +1,77 @@
 <div class="container">
     <div class="row">
-      <h2 >Detalles de {{embalse?.nombre}}</h2>
+      <h2>Detalles de {{embalse?.nombre}}</h2>
     </div>
   
-  <div class="row">
-    <label class="col-md-3" for="nombre">Nombre:</label>
-    <span class="col-md-9 offset-2 offset-md-0">{{embalse?.nombre}}</span>
-  </div>
-  <div class="row">
-    <label class="col-md-3" for="nombre">Apellidos:</label>
-    <span class="col-md-9 offset-2 offset-md-0">{{embalse?.apellidos}}</span>
-  </div>
-  <div class="row">
-    <label class="col-md-3" for="nombre">E-mail:</label>
-    <span class="col-md-9 offset-2 offset-md-0">{{embalse?.email}}</span>
-  </div>
-  <div class="row">
-    <label class="col-md-3" for="nombre">Teléfono:</label>
-    <span class="col-md-9 offset-2 offset-md-0">{{embalse?.telefono}}</span>
-  </div>
-  
-  
+    <div class="row">
+      <label class="col-md-3" for="embalse-nombre">Nombre:</label>
+      <span class="col-md-9 offset-2 offset-md-0">{{embalse?.nombre}}</span>
+    </div>
+    <div class="row">
+      <label class="col-md-3" for="embalse-codigo">Código:</label>
+      <span class="col-md-9 offset-2 offset-md-0">{{embalse?.codigo}}</span>
+    </div>
+    <div class="row">
+      <label class="col-md-3" for="embalse-embalse">Embalse:</label>
+      <span class="col-md-9 offset-2 offset-md-0">{{embalse?.embalse}}</span>
+    </div>
+    <div class="row">
+      <label class="col-md-3" for="embalse-x">Coordenada X:</label>
+      <span class="col-md-9 offset-2 offset-md-0">{{embalse?.x}}</span>
+    </div>
+    <div class="row">
+      <label class="col-md-3" for="embalse-y">Coordenada Y:</label>
+      <span class="col-md-9 offset-2 offset-md-0">{{embalse?.y}}</span>
+    </div>
+    <div class="row">
+      <label class="col-md-3" for="embalse-demarc">Demarcación:</label>
+      <span class="col-md-9 offset-2 offset-md-0">{{embalse?.demarc}}</span>
+    </div>
+    <div class="row">
+      <label class="col-md-3" for="embalse-cauce">Cauce:</label>
+      <span class="col-md-9 offset-2 offset-md-0">{{embalse?.cauce}}</span>
+    </div>
+    <div class="row">
+      <label class="col-md-3" for="embalse-google">Google Maps:</label>
+      <span class="col-md-9 offset-2 offset-md-0">
+        <a href="{{embalse?.google}}" target="_blank">Ver en Google Maps</a>
+      </span>
+    </div>
+    <div class="row">
+      <label class="col-md-3" for="embalse-openstreetmap">OpenStreetMap:</label>
+      <span class="col-md-9 offset-2 offset-md-0">
+        <a href="{{embalse?.openstreetmap}}" target="_blank">Ver en OpenStreetMap</a>
+      </span>
+    </div>
+    <div class="row">
+      <label class="col-md-3" for="embalse-wikidata">Wikidata:</label>
+      <span class="col-md-9 offset-2 offset-md-0">
+        <a href="{{embalse?.wikidata}}" target="_blank">Ver en Wikidata</a>
+      </span>
+    </div>
+    <div class="row">
+      <label class="col-md-3" for="embalse-provincia">Provincia:</label>
+      <span class="col-md-9 offset-2 offset-md-0">{{embalse?.provincia}}</span>
+    </div>
+    <div class="row">
+      <label class="col-md-3" for="embalse-ccaa">CCAA:</label>
+      <span class="col-md-9 offset-2 offset-md-0">{{embalse?.ccaa}}</span>
+    </div>
+    <div class="row">
+      <label class="col-md-3" for="embalse-tipo">Tipo:</label>
+      <span class="col-md-9 offset-2 offset-md-0">{{embalse?.tipo}}</span>
+    </div>
+    <div class="row">
+      <label class="col-md-3" for="embalse-cota-coron">Cota Coron:</label>
+      <span class="col-md-9 offset-2 offset-md-0">{{embalse?.cota_coron}}</span>
+    </div>
+    <div class="row">
+      <label class="col-md-3" for="embalse-alt-cimien">Altura del Cimiento:</label>
+      <span class="col-md-9 offset-2 offset-md-0">{{embalse?.alt_cimien}}</span>
+    </div>
+    <div class="row">
+      <label class="col-md-3" for="embalse-informe">Informe:</label>
+      <span class="col-md-9 offset-2 offset-md-0">{{embalse?.informe}}</span>
+    </div>
   </div>
   

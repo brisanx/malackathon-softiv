@@ -7,11 +7,63 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EmbalsesService {
-  private embalses: Embalse [] = [
-    {id: 1, nombre: 'Juan', apellidos: 'Pérez', email: 'perez@uma.es', telefono: '666666666'},
-    {id: 2, nombre: 'Ana', apellidos: 'García', email: 'ana@uma.es', telefono: '55555555'},
-    {id: 3, nombre: 'Luis', apellidos: 'González', email: 'gonzalez@uma.es', telefono: '444444444'},
-  ];
+  private embalses: Embalse[] = [
+    {
+        codigo: 'EB001',
+        nombre: 'Embalse de Buendía',
+        embalse: 'Buendía',
+        x: 40.6754,
+        y: -1.9203,
+        demarc: 'Cuenca del río Buendía',
+        cauce: 'Río Buendía',
+        google: 'https://www.google.com/maps/place/40.6754,-1.9203',
+        openstreetmap: 'https://www.openstreetmap.org/?mlat=40.6754&mlon=-1.9203#map=12/40.6754/-1.9203',
+        wikidata: 'https://www.wikidata.org/wiki/Q123456',
+        provincia: 'Guadalajara',
+        ccaa: 'Castilla-La Mancha',
+        tipo: 'Reservorio',
+        cota_coron: 1200,
+        alt_cimien: 1100,
+        informe: 'Informe sobre el estado del embalse de Buendía',
+    },
+    {
+        codigo: 'EB002',
+        nombre: 'Embalse de La Serena',
+        embalse: 'La Serena',
+        x: 39.1620,
+        y: -5.0573,
+        demarc: 'Cuenca del río Zújar',
+        cauce: 'Río Zújar',
+        google: 'https://www.google.com/maps/place/39.1620,-5.0573',
+        openstreetmap: 'https://www.openstreetmap.org/?mlat=39.1620&mlon=-5.0573#map=12/39.1620/-5.0573',
+        wikidata: 'https://www.wikidata.org/wiki/Q654321',
+        provincia: 'Badajoz',
+        ccaa: 'Extremadura',
+        tipo: 'Embalse',
+        cota_coron: 950,
+        alt_cimien: 840,
+        informe: 'Informe sobre el estado del embalse de La Serena',
+    },
+    {
+        codigo: 'EB003',
+        nombre: 'Embalse de Alcántara',
+        embalse: 'Alcántara',
+        x: 39.6104,
+        y: -6.3273,
+        demarc: 'Cuenca del río Tajo',
+        cauce: 'Río Tajo',
+        google: 'https://www.google.com/maps/place/39.6104,-6.3273',
+        openstreetmap: 'https://www.openstreetmap.org/?mlat=39.6104&mlon=-6.3273#map=12/39.6104/-6.3273',
+        wikidata: 'https://www.wikidata.org/wiki/Q987654',
+        provincia: 'Cáceres',
+        ccaa: 'Extremadura',
+        tipo: 'Embalse',
+        cota_coron: 400,
+        alt_cimien: 350,
+        informe: 'Informe sobre el estado del embalse de Alcántara',
+    },
+];
+
 
   constructor(private http: HttpClient) { }
   private apiUrl = 'https://api.embalses.com/embalses';
@@ -20,20 +72,7 @@ export class EmbalsesService {
     return this.embalses;
   }
 
-  addEmbalse(embalse: Embalse) {
-    embalse.id = Math.max(...this.embalses.map(c => c.id)) + 1;
-    this.embalses.push(embalse);
-  }
 
-  editarEmbalse(embalse: Embalse) {
-    let indice = this.embalses.findIndex(c => c.id == embalse.id);
-    this.embalses[indice] = embalse;
-  }
-
-  eliminarEmbalse(id: number) {
-    let indice = this.embalses.findIndex(c => c.id == id);
-    this.embalses.splice(indice, 1);
-  }
 
   // Función para obtener embalses cercanos
   getEmbalsesCercanos(latitud: number, longitud: number, numKm: number): Observable<Embalse[]> {
