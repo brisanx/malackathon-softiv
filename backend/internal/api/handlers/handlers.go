@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"strconv"
+	"strings"
 )
 
 var DB store.Client
@@ -46,10 +47,13 @@ func HandlerGetEmbalses(w http.ResponseWriter, r *http.Request) {
 
 	// Filter embalses
 	for _, embalse := range respMap {
+		embalse.X = strings.Replace(embalse.X, ",", ".", -1)
+		embalse.Y = strings.Replace(embalse.Y, ",", ".", -1)
+
 		embalseX, _ := strconv.ParseFloat(embalse.X, 64)
 		embalseY, _ := strconv.ParseFloat(embalse.Y, 64)
 
-		dist := calculations.GetDistanceBetweenPoints(embalseX, embalseY, latitud, longitud)
+		dist := calculations.Haversine(embalseX, embalseY, latitud, longitud)
 		if dist <= radio {
 			embalseList = append(embalseList, embalse)
 		}
