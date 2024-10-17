@@ -1,0 +1,14 @@
+<div class="form-container">
+    <h2>Ingresar Coordenadas</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="latitude">Latitud:</label>
+        <input type="number" id="latitude" [(ngModel)]="latitude" name="latitude" required>
+      </div>
+      <div class="form-group">
+        <label for="longitude">Longitud:</label>
+        <input type="number" id="longitude" [(ngModel)]="longitude" name="longitude" required>
+      </div>
+      <button type="submit">Guardar</button>
+    </form>
+  </div>
